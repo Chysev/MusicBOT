@@ -1,11 +1,10 @@
-const Manager = require("../connections/manager.js");
 const ytSearch = require("yt-search");
 
 require("../connections/musicPlayer.js");
 
 module.exports = {
   name: "play",
-  async execute(client, message, args, connection) {
+  async execute(client, message, args, connection, Manager) {
     Manager.on("trackStart", async (player, track) => {
       message.channel.send(
         "NOW PLAYING: " + track.title + " requested by " + track.requester.tag
