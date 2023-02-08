@@ -2,6 +2,7 @@ const conf = require("../config.json");
 const { Events } = require("discord.js");
 const Manager = require("../connections/manager.js");
 const client = require("../handlers/client.js");
+const Manager = require("../connections/manager.js");
 
 module.exports = {
   name: Events.MessageCreate,
@@ -31,7 +32,7 @@ module.exports = {
         client.commands.find(
           (commands) => commands.aliases && commands.aliases.includes(command)
         );
-      execute_commands.execute(client, message, args, connection);
+      execute_commands.execute(client, message, args, connection, Manager);
     } catch (error) {
       console.error(error);
       await message.reply("There was an error trying to execute that command!");
