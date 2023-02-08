@@ -1,17 +1,9 @@
-const Manager = require("../connections/manager.js");
-
 module.exports = {
   name: "stop",
-  async execute(client, message, args) {
+  async execute(client, message, args, connection) {
     // If the use is not in the voice channel then this command is not avaialble
     if (!message.member.voice.channel)
       return message.reply("You are not in a voice channel you stoopid");
-
-    const connection = Manager.create({
-      guild: message.guild.id,
-      voiceChannel: message.member.voice.channel.id,
-      textChannel: message.channel.id,
-    });
 
     // If music is playing then user can stop
     if (connection.playing) {
