@@ -1,10 +1,11 @@
 const ytSearch = require("yt-search");
+const Manager = require("../connections/manager.js");
 
 require("../connections/musicPlayer.js");
 
 module.exports = {
   name: "play",
-  async execute(client, message, args, connection, Manager) {
+  async execute(client, message, args) {
     Manager.on("trackStart", async (player, track) => {
       message.channel.send(
         "NOW PLAYING: " + track.title + " requested by " + track.requester.tag
@@ -35,6 +36,12 @@ module.exports = {
 
     if (res.loadType === "NO_MATCHES")
       return message.reply("There was no tracks found in the server");
+
+    const connection = Manager.create({
+      guild: message.guild.id,
+      voiceChannel: message.member.voice.channel.id,
+      textChannel: message.channel.id,
+    });
 
     connection.connect();
 
