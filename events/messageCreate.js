@@ -2,7 +2,6 @@ const conf = require("../config.json");
 const { Events } = require("discord.js");
 const Manager = require("../connections/manager.js");
 const client = require("../handlers/client.js");
-const Manager = require("../connections/manager.js");
 
 module.exports = {
   name: Events.MessageCreate,
